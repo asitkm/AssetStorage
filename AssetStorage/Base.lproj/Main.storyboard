@@ -6,11 +6,18 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Assets List-->
+        <!--Furnitures List-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AssetStorage" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,6 +28,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="keB-Gm-OmP">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="rFA-fF-gQl"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="fdr-Xq-z47"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -32,8 +43,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Assets List" id="YXi-pA-ufI">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Dl2-kg-oVz"/>
+                    <navigationItem key="navigationItem" title="Furnitures List" id="YXi-pA-ufI">
+                        <barButtonItem key="backBarButtonItem" title="List" id="b80-mb-HM6"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Dl2-kg-oVz">
+                            <connections>
+                                <action selector="didTapAddFurnitureBtn:" destination="BYZ-38-t0r" id="5ud-oH-iWa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="furnitureListTableView" destination="keB-Gm-OmP" id="79T-Ej-QPL"/>
@@ -42,6 +58,153 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="916" y="11.244377811094454"/>
+        </scene>
+        <!--Furniture Details-->
+        <scene sceneID="hlE-sI-YLK">
+            <objects>
+                <viewController storyboardIdentifier="furnitureDtlsStoreVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OSv-o5-NmI" customClass="FurnitureDetailsStoreVC" customModule="AssetStorage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Alz-kE-U6T">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eVc-Xr-1F9">
+                                <rect key="frame" x="0.0" y="64" width="375" height="548"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6XI-1g-JfY">
+                                        <rect key="frame" x="10" y="50" width="355" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="PeM-dJ-l1q"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Furniture Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rge-d5-7KB">
+                                        <rect key="frame" x="15" y="290" width="345" height="40"/>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="9dF-ZV-jeR"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="OSv-o5-NmI" id="mKd-re-uFC"/>
+                                        </connections>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYR-Dr-2M1" userLabel="furnitureNameSeparator">
+                                        <rect key="frame" x="15" y="330" width="345" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="eHa-rn-CuB"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Furniture Brand" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vbu-wG-Ot5">
+                                        <rect key="frame" x="15" y="351" width="345" height="40"/>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="bHa-RO-5O1"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="OSv-o5-NmI" id="qiU-j6-MHg"/>
+                                        </connections>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKF-Ja-vcN" userLabel="furnitureBrandSeparator">
+                                        <rect key="frame" x="15" y="391" width="345" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="1Qp-SZ-gLg"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wg0-8y-HwH" userLabel="furnitureType">
+                                        <rect key="frame" x="15" y="412" width="345" height="40"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="BOA-Qp-AjF"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="OSv-o5-NmI" id="bOr-w2-v1W"/>
+                                        </connections>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYw-DK-Y2m" userLabel="furnitureTypeseparator">
+                                        <rect key="frame" x="15" y="452" width="345" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="W9t-m3-0ba"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Vbu-wG-Ot5" secondAttribute="trailing" constant="15" id="68h-0R-NyB"/>
+                                    <constraint firstItem="6XI-1g-JfY" firstAttribute="top" secondItem="eVc-Xr-1F9" secondAttribute="top" constant="50" id="80E-uM-VVH"/>
+                                    <constraint firstItem="Rge-d5-7KB" firstAttribute="top" secondItem="6XI-1g-JfY" secondAttribute="bottom" constant="40" id="AoM-MH-alW"/>
+                                    <constraint firstItem="Vbu-wG-Ot5" firstAttribute="top" secondItem="gYR-Dr-2M1" secondAttribute="bottom" constant="20" id="Buq-3I-ISK"/>
+                                    <constraint firstItem="wg0-8y-HwH" firstAttribute="top" secondItem="lKF-Ja-vcN" secondAttribute="bottom" constant="20" id="D4i-f0-Sao"/>
+                                    <constraint firstItem="HYw-DK-Y2m" firstAttribute="leading" secondItem="wg0-8y-HwH" secondAttribute="leading" id="Dh7-dZ-ouX"/>
+                                    <constraint firstItem="lKF-Ja-vcN" firstAttribute="top" secondItem="Vbu-wG-Ot5" secondAttribute="bottom" id="F04-EN-Wpy"/>
+                                    <constraint firstItem="gYR-Dr-2M1" firstAttribute="trailing" secondItem="Rge-d5-7KB" secondAttribute="trailing" id="IXZ-Wa-pLH"/>
+                                    <constraint firstAttribute="trailing" secondItem="wg0-8y-HwH" secondAttribute="trailing" constant="15" id="N2a-O4-5gq"/>
+                                    <constraint firstItem="gYR-Dr-2M1" firstAttribute="leading" secondItem="Rge-d5-7KB" secondAttribute="leading" id="NYq-ef-FFK"/>
+                                    <constraint firstItem="Rge-d5-7KB" firstAttribute="leading" secondItem="eVc-Xr-1F9" secondAttribute="leading" constant="15" id="Nnw-Ag-nQB"/>
+                                    <constraint firstItem="6XI-1g-JfY" firstAttribute="width" secondItem="eVc-Xr-1F9" secondAttribute="width" multiplier="355:375" id="Phh-6V-J3Q"/>
+                                    <constraint firstItem="lKF-Ja-vcN" firstAttribute="trailing" secondItem="Vbu-wG-Ot5" secondAttribute="trailing" id="Rle-IP-Ooh"/>
+                                    <constraint firstItem="lKF-Ja-vcN" firstAttribute="leading" secondItem="Vbu-wG-Ot5" secondAttribute="leading" id="Tko-yo-aXk"/>
+                                    <constraint firstItem="6XI-1g-JfY" firstAttribute="leading" secondItem="eVc-Xr-1F9" secondAttribute="leading" constant="10" id="WFR-9q-0kw"/>
+                                    <constraint firstItem="Vbu-wG-Ot5" firstAttribute="leading" secondItem="eVc-Xr-1F9" secondAttribute="leading" constant="15" id="bet-fB-xxA"/>
+                                    <constraint firstAttribute="bottom" secondItem="HYw-DK-Y2m" secondAttribute="bottom" priority="250" constant="92" id="c3c-Zf-5xF"/>
+                                    <constraint firstItem="HYw-DK-Y2m" firstAttribute="top" secondItem="wg0-8y-HwH" secondAttribute="bottom" id="ffd-m2-guC"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rge-d5-7KB" secondAttribute="trailing" constant="15" id="mN0-Si-t7j"/>
+                                    <constraint firstItem="wg0-8y-HwH" firstAttribute="leading" secondItem="eVc-Xr-1F9" secondAttribute="leading" constant="15" id="sTh-GI-WQq"/>
+                                    <constraint firstItem="HYw-DK-Y2m" firstAttribute="trailing" secondItem="wg0-8y-HwH" secondAttribute="trailing" id="sve-4f-kb8"/>
+                                    <constraint firstAttribute="trailing" secondItem="6XI-1g-JfY" secondAttribute="trailing" constant="10" id="uJz-4W-URI"/>
+                                    <constraint firstItem="gYR-Dr-2M1" firstAttribute="top" secondItem="Rge-d5-7KB" secondAttribute="bottom" id="wwe-yd-mvA"/>
+                                </constraints>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARQ-TC-jpz">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" red="0.91372549020000005" green="0.37254901959999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="QJK-Dm-dFW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="SAVE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapSaveBtn:" destination="OSv-o5-NmI" eventType="touchUpInside" id="PWb-sJ-xpY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="m25-Di-UxM" firstAttribute="trailing" secondItem="eVc-Xr-1F9" secondAttribute="trailing" id="00E-mR-zLo"/>
+                            <constraint firstItem="eVc-Xr-1F9" firstAttribute="top" secondItem="m25-Di-UxM" secondAttribute="top" id="8Ou-Yh-jnr"/>
+                            <constraint firstItem="ARQ-TC-jpz" firstAttribute="trailing" secondItem="m25-Di-UxM" secondAttribute="trailing" id="HhZ-YK-mWk"/>
+                            <constraint firstItem="ARQ-TC-jpz" firstAttribute="leading" secondItem="m25-Di-UxM" secondAttribute="leading" id="Jvw-Fj-VBG"/>
+                            <constraint firstItem="ARQ-TC-jpz" firstAttribute="bottom" secondItem="m25-Di-UxM" secondAttribute="bottom" id="Ndp-tj-Vce"/>
+                            <constraint firstItem="ARQ-TC-jpz" firstAttribute="top" secondItem="eVc-Xr-1F9" secondAttribute="bottom" constant="5" id="Yj5-JW-C0i"/>
+                            <constraint firstItem="eVc-Xr-1F9" firstAttribute="leading" secondItem="m25-Di-UxM" secondAttribute="leading" id="gQe-Qw-cqZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="m25-Di-UxM"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Furniture Details" id="EgM-Nf-Uyz"/>
+                    <connections>
+                        <outlet property="containerScrollView" destination="eVc-Xr-1F9" id="Vya-Qs-ikE"/>
+                        <outlet property="furnitureBrandTF" destination="Vbu-wG-Ot5" id="TwR-ns-zlZ"/>
+                        <outlet property="furnitureImgView" destination="6XI-1g-JfY" id="roF-Mc-FWq"/>
+                        <outlet property="furnitureNamTF" destination="Rge-d5-7KB" id="qY2-cj-URh"/>
+                        <outlet property="furnitureTypeTF" destination="wg0-8y-HwH" id="TqI-d6-GPZ"/>
+                        <outlet property="saveBtn" destination="ARQ-TC-jpz" id="mHT-wv-tt6"/>
+                        <outlet property="saveBtnBottomConstraint" destination="Ndp-tj-Vce" id="hM1-BT-fTq"/>
+                        <outlet property="saveBtnTopConstraint" destination="Yj5-JW-C0i" id="2Lz-Ge-fpF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ORH-WZ-Cpq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="694.90254872563719"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oVa-2N-Fea">
@@ -60,6 +223,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZd-Rh-nmr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="170" y="12"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="a94-hN-8R0">
+            <objects>
+                <navigationController storyboardIdentifier="furnitureDtlsStoreNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pL4-3k-uuu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ypz-r3-6TE">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OSv-o5-NmI" kind="relationship" relationship="rootViewController" id="DMX-tJ-GJA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p2Q-rB-m05" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="168" y="695.35232383808102"/>
         </scene>
     </scenes>
 </document>

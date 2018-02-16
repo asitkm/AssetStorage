@@ -12,6 +12,10 @@
 		EBAB28042036EDB900958CB0 /* EmptyPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBAB28032036EDB900958CB0 /* EmptyPageView.xib */; };
 		EBAB28062036EE9500958CB0 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBAB28052036EE9500958CB0 /* ImageAssets.xcassets */; };
 		EBAB28082036F10000958CB0 /* EmptyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB28072036F10000958CB0 /* EmptyPageView.swift */; };
+		EBAB280C2036F7C200958CB0 /* FurnitureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB280A2036F7C200958CB0 /* FurnitureTableViewCell.swift */; };
+		EBAB280D2036F7C200958CB0 /* FurnitureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBAB280B2036F7C200958CB0 /* FurnitureTableViewCell.xib */; };
+		EBAB280F203728CB00958CB0 /* FurnitureDetailsStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB280E203728CB00958CB0 /* FurnitureDetailsStoreVC.swift */; };
+		EBAB28132037565200958CB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAB28122037565200958CB0 /* Constants.swift */; };
 		EBE964622036D47F00042C05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE964612036D47F00042C05 /* AppDelegate.swift */; };
 		EBE964642036D47F00042C05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE964632036D47F00042C05 /* ViewController.swift */; };
 		EBE964672036D47F00042C05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBE964652036D47F00042C05 /* Main.storyboard */; };
@@ -26,6 +30,10 @@
 		EBAB28032036EDB900958CB0 /* EmptyPageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyPageView.xib; sourceTree = "<group>"; };
 		EBAB28052036EE9500958CB0 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
 		EBAB28072036F10000958CB0 /* EmptyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPageView.swift; sourceTree = "<group>"; };
+		EBAB280A2036F7C200958CB0 /* FurnitureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnitureTableViewCell.swift; sourceTree = "<group>"; };
+		EBAB280B2036F7C200958CB0 /* FurnitureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FurnitureTableViewCell.xib; sourceTree = "<group>"; };
+		EBAB280E203728CB00958CB0 /* FurnitureDetailsStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnitureDetailsStoreVC.swift; sourceTree = "<group>"; };
+		EBAB28122037565200958CB0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EBE9645E2036D47F00042C05 /* AssetStorage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssetStorage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE964612036D47F00042C05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBE964632036D47F00042C05 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +60,7 @@
 			children = (
 				EBAB27FE2036EC0000958CB0 /* Utility.swift */,
 				EBAB28002036EC1500958CB0 /* ViewUtility.swift */,
+				EBAB28122037565200958CB0 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -63,6 +72,15 @@
 				EBAB28072036F10000958CB0 /* EmptyPageView.swift */,
 			);
 			path = EmptyPages;
+			sourceTree = "<group>";
+		};
+		EBAB28092036F79C00958CB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EBAB280A2036F7C200958CB0 /* FurnitureTableViewCell.swift */,
+				EBAB280B2036F7C200958CB0 /* FurnitureTableViewCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		EBE964552036D47F00042C05 = {
@@ -88,12 +106,14 @@
 		EBE964602036D47F00042C05 /* AssetStorage */ = {
 			isa = PBXGroup;
 			children = (
+				EBAB28092036F79C00958CB0 /* Views */,
 				EBE964612036D47F00042C05 /* AppDelegate.swift */,
 				EBE964632036D47F00042C05 /* ViewController.swift */,
 				EBE964652036D47F00042C05 /* Main.storyboard */,
 				EBE964682036D47F00042C05 /* Assets.xcassets */,
 				EBE9646A2036D47F00042C05 /* LaunchScreen.storyboard */,
 				EBE9646D2036D47F00042C05 /* Info.plist */,
+				EBAB280E203728CB00958CB0 /* FurnitureDetailsStoreVC.swift */,
 			);
 			path = AssetStorage;
 			sourceTree = "<group>";
@@ -169,6 +189,7 @@
 				EBAB28042036EDB900958CB0 /* EmptyPageView.xib in Resources */,
 				EBE964692036D47F00042C05 /* Assets.xcassets in Resources */,
 				EBE964672036D47F00042C05 /* Main.storyboard in Resources */,
+				EBAB280D2036F7C200958CB0 /* FurnitureTableViewCell.xib in Resources */,
 				EBAB28062036EE9500958CB0 /* ImageAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,12 +201,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBAB280F203728CB00958CB0 /* FurnitureDetailsStoreVC.swift in Sources */,
 				EBAB27FF2036EC0000958CB0 /* Utility.swift in Sources */,
+				EBAB280C2036F7C200958CB0 /* FurnitureTableViewCell.swift in Sources */,
 				EBAB28082036F10000958CB0 /* EmptyPageView.swift in Sources */,
 				EBAB28012036EC1500958CB0 /* ViewUtility.swift in Sources */,
 				EBE964642036D47F00042C05 /* ViewController.swift in Sources */,
 				EBE964752036D59A00042C05 /* Furniture.swift in Sources */,
 				EBE964622036D47F00042C05 /* AppDelegate.swift in Sources */,
+				EBAB28132037565200958CB0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
