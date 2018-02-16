@@ -10,16 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // Outlets
+    
+    @IBOutlet weak var furnitureListTableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        setupViewElements()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    private func setupViewElements()
+    {
+        furnitureListTableView.isHidden = true
+        ViewUtility.addEmptyPage(toView: view, forType: EmptyPageType.NoRecordsFound)
+    }
 }
 
