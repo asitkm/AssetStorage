@@ -78,11 +78,15 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
             
             let fName = (furnitureNamTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
             
-            let fBrand = (furnitureBrandTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)) ?? "Unknown"
+            var fBrand = furnitureBrandTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
-            let furniture = Furniture(furnitureName: fName, furnitureBrand: fBrand, furnitureImg: imgfilePath, furnitureType: furnitureType.rawValue)
+            if fBrand == ""
+            {
+                fBrand = "Unknown"
+            }
+            
+            let furniture = Furniture(furnitureName: fName, furnitureBrand: fBrand!, furnitureImg: imgfilePath, furnitureType: furnitureType.rawValue)
             Furniture.storeData(forFurniture: furniture)
-            
             
             navigationController?.popViewController(animated: true)
         }
@@ -151,6 +155,11 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
     
     func setupViewElements()
     {
+        // Adding Tap Gesture To the view.
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FurnitureDetailsStoreVC.didTapOnView(_ :)))
+        view.addGestureRecognizer(tapGesture)
+        
         if image != nil
         {
             furnitureImgView.image = image
@@ -158,6 +167,11 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
         
         furnitureType = FurnitureType.others
         furnitureTypeTF.text = FurnitureType.others.rawValue
+    }
+    
+    @objc func didTapOnView(_ sender: UITapGestureRecognizer)
+    {
+        view.endEditing(true)
     }
     
     func isAllMandatoryFieldsValid() -> (status: Bool, errorMsg: String)
@@ -219,27 +233,27 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
     {
         let actionSheet = UIAlertController(title: "Select current Furniture type.", message: nil, preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "Bed", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: FurnitureType.bed.rawValue, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.furnitureTypeTF.text = FurnitureType.bed.rawValue
             self.furnitureType = FurnitureType.bed
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Sofa", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: FurnitureType.sofa.rawValue, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.furnitureTypeTF.text = FurnitureType.sofa.rawValue
             self.furnitureType = FurnitureType.sofa
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Dining Table", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: FurnitureType.table.rawValue, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.furnitureTypeTF.text = FurnitureType.table.rawValue
             self.furnitureType = FurnitureType.table
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Chairs", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: FurnitureType.chairs.rawValue, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.furnitureTypeTF.text = FurnitureType.chairs.rawValue
             self.furnitureType = FurnitureType.chairs
         }))
         
-        actionSheet.addAction(UIAlertAction(title: "Others", style: .default, handler: { (alert:UIAlertAction!) -> Void in
+        actionSheet.addAction(UIAlertAction(title: FurnitureType.others.rawValue, style: .default, handler: { (alert:UIAlertAction!) -> Void in
             self.furnitureTypeTF.text = FurnitureType.others.rawValue
             self.furnitureType = FurnitureType.others
         }))

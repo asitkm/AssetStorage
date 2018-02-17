@@ -21,29 +21,7 @@ class Utility
         
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         
-        let documentPath = documentsURL.path
-        
         let fileNameURL = documentsURL.appendingPathComponent("\(String(imgTag)).png")
-        
-        // Check if the same tag image exists.
-        
-        do
-        {
-            let files = try fileManager.contentsOfDirectory(atPath: "\(documentPath)")
-            
-            for file in files
-            {
-                if "\(documentPath)/\(file)" == fileNameURL.path
-                {
-                    try fileManager.removeItem(at: fileNameURL)
-                }
-            }
-        }
-        catch
-        {
-            print("Could not save image data.")
-        }
-        
         
         if let data = UIImagePNGRepresentation(image) {
             try? data.write(to: fileNameURL, options: .atomic)
@@ -54,9 +32,9 @@ class Utility
     
     class func getImage(forFurnitureImgPath imageName: String) -> UIImage
     {
-        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let userDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
         if let dirPath = paths.first
         {
             let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName)

@@ -22,10 +22,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // Constants and Variables.
     
     var furnituresArr: [Furniture]? = nil
+    var isInitialSetupDone: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,11 +49,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let actionSheet = UIAlertController(title: "Select how you want to add the Item", message: nil, preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-            self.camera()
+            self.openCamera()
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-//            self.photoLibrary()
+            self.openGallery()
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -61,7 +61,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         vc.present(actionSheet, animated: true, completion: nil)
     }
     
-    private func camera()
+    private func openCamera()
     {
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             let myPickerController = UIImagePickerController()
@@ -71,14 +71,37 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    private func openGallery()
+    {
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            let myPickerController = UIImagePickerController()
+            myPickerController.delegate = self;
+            myPickerController.sourceType = .photoLibrary
+            currentVC.present(myPickerController, animated: true, completion: nil)
+        }
+    }
+    
     private func setupViewElements()
     {
-        furnitureListTableView.register(UINib(nibName: "FurnitureTableViewCell", bundle: nil), forCellReuseIdentifier: "FurnitureTableViewCellIdentifier")
+        // This is to setup table view and other ui initialization if any.
         
-        furnitureListTableView.rowHeight = UITableViewAutomaticDimension
-        furnitureListTableView.estimatedRowHeight = 150
+        if isInitialSetupDone == false
+        {
+            isInitialSetupDone = true
+            
+            furnitureListTableView.register(UINib(nibName: "FurnitureTableViewCell", bundle: nil), forCellReuseIdentifier: "FurnitureTableViewCellIdentifier")
+            
+            furnitureListTableView.rowHeight = UITableViewAutomaticDimension
+            furnitureListTableView.estimatedRowHeight = 150
+            furnitureListTableView.tableFooterView = UIView(frame: CGRect.zero)
+        }
+        
+        
+        // Fetching data for stored furnitures.
         
         furnituresArr = Furniture.getStoredFurnituresData()
+        
+        ViewUtility.removeEmptyPage(fromView: view)
         
         if furnituresArr?.count != nil
         {
@@ -141,9 +164,5 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         return UITableViewCell()
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 150
-//    }
 }
 

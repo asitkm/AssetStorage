@@ -20,10 +20,23 @@ class ViewUtility
         switch emptyViewType {
         case EmptyPageType.NoRecordsFound:
             let emptyPageView = EmptyPageView.instanceFromNib()
+            emptyPageView.tag = 1001
             emptyPageView.frame = view.frame
             view.addSubview(emptyPageView)
             addConstraint(fromView: view, toView: emptyPageView, withEdgeInset: UIEdgeInsets.zero)
             break
+        }
+    }
+    
+    class func removeEmptyPage(fromView containerView: UIView)
+    {
+        for view in containerView.subviews
+        {
+            if view.tag == 1001
+            {
+                view.removeFromSuperview()
+                break
+            }
         }
     }
     

@@ -46,7 +46,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Furnitures List" id="YXi-pA-ufI">
                         <barButtonItem key="backBarButtonItem" title="List" id="b80-mb-HM6"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Dl2-kg-oVz">
+                        <barButtonItem key="rightBarButtonItem" title="Add Item" id="Dl2-kg-oVz">
                             <connections>
                                 <action selector="didTapAddFurnitureBtn:" destination="BYZ-38-t0r" id="5ud-oH-iWa"/>
                             </connections>
@@ -69,7 +69,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eVc-Xr-1F9">
-                                <rect key="frame" x="0.0" y="64" width="375" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="592"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6XI-1g-JfY">
                                         <rect key="frame" x="10" y="50" width="355" height="200"/>
@@ -224,24 +224,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZd-Rh-nmr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="170" y="12"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="a94-hN-8R0">
-            <objects>
-                <navigationController storyboardIdentifier="furnitureDtlsStoreNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pL4-3k-uuu" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ypz-r3-6TE">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="OSv-o5-NmI" kind="relationship" relationship="rootViewController" id="DMX-tJ-GJA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="p2Q-rB-m05" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="168" y="695.35232383808102"/>
         </scene>
     </scenes>
 </document>
