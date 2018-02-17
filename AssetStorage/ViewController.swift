@@ -75,6 +75,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     {
         furnitureListTableView.register(UINib(nibName: "FurnitureTableViewCell", bundle: nil), forCellReuseIdentifier: "FurnitureTableViewCellIdentifier")
         
+        furnitureListTableView.rowHeight = UITableViewAutomaticDimension
+        furnitureListTableView.estimatedRowHeight = 150
+        
         furnituresArr = Furniture.getStoredFurnituresData()
         
         if furnituresArr?.count != nil
@@ -130,13 +133,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FurnitureTableViewCellIdentifier", for: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "FurnitureTableViewCellIdentifier", for: indexPath) as? FurnitureTableViewCell
+        {
+            cell.configureCell(withFurniture: furnituresArr![indexPath.row])
+            return cell
+        }
         
-        return cell
+        return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 150
+//    }
 }
 

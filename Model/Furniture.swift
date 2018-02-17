@@ -127,7 +127,7 @@ class Furniture: NSObject, NSCoding
         {
             if let decoded = userDefaults.object(forKey: furnitureStoreArrKeyName) as? Data
             {
-                furnituresArr = NSKeyedUnarchiver.unarchiveObject(with: decoded as Data) as! [Furniture]
+                furnituresArr = NSKeyedUnarchiver.unarchiveObject(with: decoded as Data) as? [Furniture]
             }
         }
         

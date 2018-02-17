@@ -46,9 +46,26 @@ class Utility
         
         
         if let data = UIImagePNGRepresentation(image) {
-            try? data.write(to: fileNameURL)
+            try? data.write(to: fileNameURL, options: .atomic)
         }
         
-        return fileNameURL.path
+        return imgTag
+    }
+    
+    class func getImage(forFurnitureImgPath imageName: String) -> UIImage
+    {
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageName)
+            if let image    = UIImage(contentsOfFile: imageURL.path)
+            {
+                return image
+            }
+        }
+        
+        return UIImage()
     }
 }

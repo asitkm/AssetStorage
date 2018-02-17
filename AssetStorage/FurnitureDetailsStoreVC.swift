@@ -100,7 +100,7 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
     
     @objc func keyBoardWillHide(notification:NSNotification)
     {
-        saveBtnBottomConstraint.constant = 0
+        saveBtnTopConstraint.constant = 0
     }
     
     // MARK:- TEXTFIELD_DELEGATE
