@@ -76,11 +76,27 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
         {
             let imgfilePath = Utility.storeAndGetImagePath(forImage: image!, withImageTag: (furnitureNamTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!)
             
-            let furniture = Furniture(furnitureName: (furnitureNamTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!, furnitureBrand: (furnitureBrandTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!, furnitureImg: imgfilePath, furnitureType: furnitureType.rawValue)
+            let fName = (furnitureNamTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
             
+            let fBrand = (furnitureBrandTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)) ?? "Unknown"
+            
+            let furniture = Furniture(furnitureName: fName, furnitureBrand: fBrand, furnitureImg: imgfilePath, furnitureType: furnitureType.rawValue)
             Furniture.storeData(forFurniture: furniture)
             
+            
             navigationController?.popViewController(animated: true)
+        }
+        else
+        {
+            // Show error alert for validation failed.
+            
+            let alert = UIAlertController(title: "OOPS!", message: isAllMandatoryFieldsValid().errorMsg, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: { _ in
+                
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -125,7 +141,7 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
         
         if textField == furnitureTypeTF {
             view.endEditing(true)
-            furnitureType = showFurnitureTypeActionSheet()
+            showFurnitureTypeActionSheet()
         }
         
         return true
@@ -140,11 +156,28 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
             furnitureImgView.image = image
         }
         
-        furnitureTypeTF.text = "Others"
+        furnitureType = FurnitureType.others
+        furnitureTypeTF.text = FurnitureType.others.rawValue
     }
     
     func isAllMandatoryFieldsValid() -> (status: Bool, errorMsg: String)
     {
+        let furnitureNameStr = furnitureNamTF.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        if furnitureNameStr == ""
+        {
+            return (false, "Furniture name field cannot be empty.")
+        }
+        
+        let fnameRegex = "[A-Z0-9a-z ]*"
+        
+        let fnamePredicate = NSPredicate(format: "SELF MATCHES %@", fnameRegex) as NSPredicate
+        
+        if fnamePredicate.evaluate(with: furnitureNameStr) == false
+        {
+            return (false, "Invalid data for name field.")
+        }
+        
         return (true, "")
     }
     
@@ -182,41 +215,37 @@ class FurnitureDetailsStoreVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func showFurnitureTypeActionSheet() -> FurnitureType
+    func showFurnitureTypeActionSheet()
     {
         let actionSheet = UIAlertController(title: "Select current Furniture type.", message: nil, preferredStyle: .actionSheet)
         
-        var tmpFType = FurnitureType.others
-        
         actionSheet.addAction(UIAlertAction(title: "Bed", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-            self.furnitureTypeTF.text = "Bed"
-            tmpFType = FurnitureType.bed
+            self.furnitureTypeTF.text = FurnitureType.bed.rawValue
+            self.furnitureType = FurnitureType.bed
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Sofa", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-            self.furnitureTypeTF.text = "Sofa"
-            tmpFType = FurnitureType.sofa
+            self.furnitureTypeTF.text = FurnitureType.sofa.rawValue
+            self.furnitureType = FurnitureType.sofa
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Dining Table", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-            self.furnitureTypeTF.text = "Dining Table"
-            tmpFType = FurnitureType.diningTable
+            self.furnitureTypeTF.text = FurnitureType.table.rawValue
+            self.furnitureType = FurnitureType.table
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Chairs", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-            self.furnitureTypeTF.text = "Chairs"
-            tmpFType = FurnitureType.chairs
+            self.furnitureTypeTF.text = FurnitureType.chairs.rawValue
+            self.furnitureType = FurnitureType.chairs
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Others", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-            self.furnitureTypeTF.text = "Others"
-            tmpFType = FurnitureType.others
+            self.furnitureTypeTF.text = FurnitureType.others.rawValue
+            self.furnitureType = FurnitureType.others
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(actionSheet, animated: true, completion: nil)
-        
-        return tmpFType
     }
 }

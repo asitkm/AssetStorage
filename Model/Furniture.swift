@@ -12,7 +12,7 @@ import UIKit
 enum FurnitureType: String {
     case bed = "Bed"
     case sofa = "Sofa"
-    case diningTable = "Dining Table"
+    case table = "Table"
     case chairs = "Chairs"
     case others = "Others"
 }
