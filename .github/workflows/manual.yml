@@ -11,7 +11,7 @@ on:
       Scheme:
         type: choice
         # Default value if no value is selected
-        default: 'SPDev'
+        default: 'AssetStorage'
         # Input has to be provided for the workflow to run
         required: true
         options:
