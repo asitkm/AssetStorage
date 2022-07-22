@@ -15,9 +15,9 @@ on:
         # Input has to be provided for the workflow to run
         required: true
         options:
-        - SPDev
-        - SPTest
-        - SPBeta
+        - Dev
+        - Test
+        - Beta
       Note:
         description: 'Add release notes for this build'
         default: 'This build is ready for testing'
