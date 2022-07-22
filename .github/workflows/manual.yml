@@ -19,7 +19,7 @@ on:
         - SPTest
         - SPBeta
       Note:
-        description: 'Select scheme to build'
+        description: 'Add release notes for this build'
         default: 'This build is ready for testing'
         required: true
                 
