@@ -15,7 +15,7 @@ on:
         # Input has to be provided for the workflow to run
         required: true
         options:
-        - Debug
+        - debug
         - Release
         - Beta
       Note:
