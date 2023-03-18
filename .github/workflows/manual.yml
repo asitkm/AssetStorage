@@ -31,6 +31,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Increment Build Number
+        run: echo "${{vars.DEV_BUILD_NUMBER}} + 1" >> ${{ vars.DEV_BUILD_NUMBER }}
+
       - name: Printing Build Number
         run: echo "Value of build number is ${{ vars.DEV_BUILD_NUMBER }}"
           
