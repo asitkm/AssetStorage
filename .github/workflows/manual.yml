@@ -22,6 +22,8 @@ on:
         description: 'Add release notes for this build'
         default: 'This build is ready for testing'
         required: true
+env:
+  dev_build: ${{ vars.DEV_BUILD_NUMBER }}
                 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -32,7 +34,8 @@ jobs:
 
     steps:
       - name: Increment Build Number
-        run: echo "echo $(${{vars.DEV_BUILD_NUMBER}}+1)" >> ${{ vars.DEV_BUILD_NUMBER }}
+        id: incr-number
+        run: echo (${{ env.dev_build }}+1) >> ${{ vars.DEV_BUILD_NUMBER }}
 
       - name: Printing Build Number
         run: echo "Value of build number is ${{ vars.DEV_BUILD_NUMBER }}"
