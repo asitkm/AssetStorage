@@ -34,9 +34,9 @@ jobs:
 
     steps:
       - name: Increment Build Number
-        id: incr-number
-        run: echo $((${{ env.dev_build }}+1)) >> ${{ vars.DEV_BUILD_NUMBER }}
+        id: incr
+        run: echo ::set-output $((${{ env.dev_build }}+1)) >> ${{ vars.DEV_BUILD_NUMBER }}
 
-      - name: Printing Build Number
-        run: echo "Value of build number is ${{ vars.DEV_BUILD_NUMBER }}"
+      - name: Printing
+        run: echo "Build number ${{ vars.DEV_BUILD_NUMBER }}"
           
