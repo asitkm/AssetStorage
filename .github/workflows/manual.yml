@@ -35,7 +35,7 @@ jobs:
     steps:
        - name: Increment Build Number
          id: incr
-         run: echo "DEV_BUILD_NUMBER=$((${{ env.dev_build }}+1))" >> $GITHUB_ENV
+         run: echo "DEV_BUILD_NUMBER=$((${{ env.dev_build }}+1))" >> $GITHUB_REPOSITORY
 
        - name: Printing
          run: echo "Build number ${{ vars.DEV_BUILD_NUMBER }}"
