@@ -33,10 +33,12 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Increment Build Number
-        id: incr
-        run: echo "::set-output $((${{ env.dev_build }}+1))" >> ${{ vars.DEV_BUILD_NUMBER }}
+      - name: Print
+        run: echo "$GITHUB_CONTEXT" 
+#       - name: Increment Build Number
+#         id: incr
+#         run: echo "::set-output $((${{ env.dev_build }}+1))" >> ${{ vars.DEV_BUILD_NUMBER }}
 
-      - name: Printing
-        run: echo "Build number ${{ vars.DEV_BUILD_NUMBER }}"
+#       - name: Printing
+#         run: echo "Build number ${{ vars.DEV_BUILD_NUMBER }}"
           
