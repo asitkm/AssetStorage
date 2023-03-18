@@ -35,7 +35,7 @@ jobs:
     steps:
        - name: Increment Build Number
          id: incr
-         run: echo "${{ vars.DEV_BUILD_NUMBER = $((${{ env.dev_build }}+1)) }}"
+         run: echo "${{ vars.DEV_BUILD_NUMBER }} = $((${{ env.dev_build }}+1))"
 
        - name: Printing
          run: echo "Build number ${{ vars.DEV_BUILD_NUMBER }}"
