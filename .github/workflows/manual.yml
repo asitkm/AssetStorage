@@ -33,14 +33,21 @@ jobs:
     runs-on: macos-latest
 
     steps:         
+       - name: Getting Build Number
+         uses: UnlyEd/github-action-store-variable@v2.1.0
+         with:
+          variables: |
+              DEV_BUILD
+          
        - name: Increment Build Number
          id: incr
-         run: echo "DEV_BUILD_NUMBER=$((${{ env.dev_build }}+1))" >> $GITHUB_ENV
+         run: echo "DEV_BUILD_NUMBER=$(($DEV_BUILD+1))" >> $GITHUB_ENV
          
        - name: Saving Build Number
          uses: UnlyEd/github-action-store-variable@v2.1.0
          with:
-          variables: DEV_BUILD=${{ env.DEV_BUILD_NUMBER }}
+          variables: |
+            DEV_BUILD=${{ env.DEV_BUILD_NUMBER }}
 
        - name: Printing
          run: echo "Build number $DEV_BUILD"
