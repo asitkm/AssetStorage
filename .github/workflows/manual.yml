@@ -32,23 +32,14 @@ jobs:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-latest
 
-    steps:         
-       - name: Getting Build Number
-         uses: UnlyEd/github-action-store-variable@v2.1.0
-         with:
-          variables: |
-              DEV_BUILD
-          
+    steps:                   
        - name: Increment Build Number
          id: incr
-         run: echo "DEV_BUILD_NUMBER=$(($DEV_BUILD+1))" >> $GITHUB_ENV
+         run: echo "$((${{ env.dev_build }}+1))" > dev_build.txt
          
-       - name: Saving Build Number
-         uses: UnlyEd/github-action-store-variable@v2.1.0
+       - name: Upload build number
+         uses: actions/upload-artifact@v3
          with:
-          variables: |
-            DEV_BUILD=${{ env.DEV_BUILD_NUMBER }}
-
-       - name: Printing
-         run: echo "Build number $DEV_BUILD"
+           name: dev_build
+           path: dev_build.txt
           
