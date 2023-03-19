@@ -32,11 +32,16 @@ jobs:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-latest
 
-    steps:
+    steps:         
        - name: Increment Build Number
          id: incr
-         run: echo "${{ vars.DEV_BUILD_NUMBER }} = '$((${{ env.dev_build }}+1))'"
+         run: echo "DEV_BUILD_NUMBER=$((${{ env.dev_build }}+1))" >> $GITHUB_ENV
+         
+       - name: Saving Build Number
+         uses: UnlyEd/github-action-store-variable@v2.1.0
+         with:
+          variables: DEV_BUILD=${{ env.DEV_BUILD_NUMBER }}
 
        - name: Printing
-         run: echo "Build number ${{ vars.DEV_BUILD_NUMBER }}"
+         run: echo "Build number $DEV_BUILD"
           
