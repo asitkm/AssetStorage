@@ -35,18 +35,13 @@ jobs:
     steps:
         - name: Download dev build number artifact
           uses: actions/download-artifact@v3
-          with:
+          with: 
             name: dev_build
             
         - name: Increment Build Number
           id: incr
-          run: |
-            value = `cat dev_build.txt.txt`
-            expr ($value \+ 1) > dev_build.txt
-         
-        - name: Upload build number
-          uses: actions/upload-artifact@v3
-          with:
-            name: dev_build
-            path: dev_build.txt
+          run: expr $((${{ env.dev_build }}+1)) >> ${{ vars.DEV_BUILD_NUMBER }}
+          
+        - name: Printing build number
+          run: echo "${{ vars.DEV_BUILD_NUMBER }}"
           
