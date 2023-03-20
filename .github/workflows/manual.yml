@@ -32,12 +32,7 @@ jobs:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-latest
 
-    steps:
-        - name: Download dev build number artifact
-          uses: actions/download-artifact@v3
-          with: 
-            name: dev_build
-            
+    steps:  
         - name: Increment Build Number
           id: incr
           run: expr $((${{ env.dev_build }}+1)) >> ${{ vars.DEV_BUILD_NUMBER }}
