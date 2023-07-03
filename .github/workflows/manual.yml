@@ -40,7 +40,7 @@ jobs:
     steps:  
       - name: Restore buildcache
         uses: mikehardy/buildcache-action@v1
-        continue-on-error: false
+        continue-on-error: true
         with:
           cache_key: ${{ matrix.os }} # optional: separate caches maybe?
           upload_buildcache_log: 'true' # optional: 100% cache misses? Find out why
