@@ -71,4 +71,9 @@ jobs:
           -destination \"generic/platform=iOS Simulator\" \
           build \
           CODE_SIGNING_ALLOWED=NO"
+
+      - name: Fail check
+        if: ${{ cancelled() }}
+        run: |
+          echo: "Cancelled by user"
           
