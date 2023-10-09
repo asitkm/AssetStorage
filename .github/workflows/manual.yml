@@ -38,6 +38,11 @@ jobs:
     runs-on: macos-latest
 
     steps:  
+      - name: Fail check
+        if: ${{ cancelled() }}
+        run: |
+          echo: "Cancelled by user"
+          
       - name: Restore buildcache
         uses: mikehardy/buildcache-action@v1
         continue-on-error: true
@@ -71,9 +76,4 @@ jobs:
           -destination \"generic/platform=iOS Simulator\" \
           build \
           CODE_SIGNING_ALLOWED=NO"
-
-      - name: Fail check
-        if: ${{ cancelled() }}
-        run: |
-          echo: "Cancelled by user"
           
