@@ -38,6 +38,31 @@ jobs:
     runs-on: macos-latest
 
     steps:  
+      - name: Send GitHub Action trigger data to Slack workflow
+        id: slack
+        channel-id: 'C040Y3ACZM1'
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "`${{ github.actor }}` Started distributing build `${{ github.event.inputs.Scheme }} v${{ github.event.inputs.Version }} (${{ github.event.inputs.BuildNumber }})` ⌛\n\nRelease Note: `${{ github.event.inputs.ReleaseNote }}`\n\nDistributing To `${{ github.event.inputs.Platform }}` Platform(s)\n\n\nBranch: `${{ github.ref }}`\n\n\nLast Commit: `${{ github.sha }}` Run: ",
+              "attachments": [
+                {
+                  "pretext": "",
+                  "color": "dbab09",
+                  "fields": [
+                    {
+                      "title": "Status",
+                      "short": true,
+                      "value": "In Progress.."
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: 'xoxb-4017647486839-4017649562263-AYWIgEnJuRs02BL4QMl7BliI'
+          
       - name: Fail check
         if: ${{ cancelled() }}
         run: |
@@ -76,4 +101,29 @@ jobs:
           -destination \"generic/platform=iOS Simulator\" \
           build \
           CODE_SIGNING_ALLOWED=NO"
+
+      - name: Send Failure GitHub Action trigger data to Slack workflow
+        id: slack
+        channel-id: 'C040Y3ACZM1'
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "Failed to build",
+              "attachments": [
+                {
+                  "pretext": "",
+                  "color": "dbab09",
+                  "fields": [
+                    {
+                      "title": "Status",
+                      "short": false,
+                      "value": "Failed"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: 'xoxb-4017647486839-4017649562263-AYWIgEnJuRs02BL4QMl7BliI'
           
