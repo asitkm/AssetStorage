@@ -61,7 +61,7 @@ jobs:
               ]
             }
         env:
-          SLACK_BOT_TOKEN: 'xoxb-4017647486839-4017649562263-amoLpE9cfDvdL36byIi8bZHZ'
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           
       - name: Fail check
         if: ${{ cancelled() }}
@@ -124,5 +124,5 @@ jobs:
               ]
             }
         env:
-          SLACK_BOT_TOKEN: 'xoxb-4017647486839-4017649562263-amoLpE9cfDvdL36byIi8bZHZ'
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           
