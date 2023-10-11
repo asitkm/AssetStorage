@@ -103,7 +103,6 @@ jobs:
           CODE_SIGNING_ALLOWED=NO"
 
       - name: Send Failure GitHub Action trigger data to Slack workflow
-        id: slack
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: 'C040Y3ACZM1'
