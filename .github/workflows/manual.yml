@@ -40,9 +40,9 @@ jobs:
     steps:  
       - name: Send GitHub Action trigger data to Slack workflow
         id: slack
-        channel-id: 'C040Y3ACZM1'
         uses: slackapi/slack-github-action@v1.24.0
         with:
+          channel-id: 'C040Y3ACZM1'
           payload: |
             {
               "text": "`${{ github.actor }}` Started distributing build `${{ github.event.inputs.Scheme }} v${{ github.event.inputs.Version }} (${{ github.event.inputs.BuildNumber }})` ⌛\n\nRelease Note: `${{ github.event.inputs.ReleaseNote }}`\n\nDistributing To `${{ github.event.inputs.Platform }}` Platform(s)\n\n\nBranch: `${{ github.ref }}`\n\n\nLast Commit: `${{ github.sha }}` Run: ",
@@ -107,6 +107,7 @@ jobs:
         channel-id: 'C040Y3ACZM1'
         uses: slackapi/slack-github-action@v1.24.0
         with:
+          channel-id: 'C040Y3ACZM1'
           payload: |
             {
               "text": "Failed to build",
