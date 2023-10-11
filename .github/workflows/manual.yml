@@ -45,7 +45,7 @@ jobs:
           channel-id: 'C040Y3ACZM1'
           payload: |
             {
-              "text": "`${{ github.actor }}` Started distributing build `${{ github.event.inputs.Scheme }} v${{ github.event.inputs.Version }} (${{ github.event.inputs.BuildNumber }})` ⌛\n\nRelease Note: `${{ github.event.inputs.ReleaseNote }}`\n\nDistributing To `${{ github.event.inputs.Platform }}` Platform(s)\n\n\nBranch: `${{ github.ref }}`\n\n\nLast Commit: `${{ github.sha }}` Run: ",
+              "text": "`${{ github.actor }}` Started distributing build",
               "attachments": [
                 {
                   "pretext": "",
@@ -62,45 +62,6 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          
-      - name: Fail check
-        if: ${{ cancelled() }}
-        run: |
-          echo: "Cancelled by user"
-          
-      - name: Restore buildcache
-        uses: mikehardy/buildcache-action@v1
-        continue-on-error: true
-        with:
-          cache_key: ${{ matrix.os }} # optional: separate caches maybe?
-          upload_buildcache_log: 'true' # optional: 100% cache misses? Find out why
-          zero_buildcache_stats: 'false' # optional: lifetime vs per-run stats?
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Restore node_modules from cache
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-          
-      - name: Build
-        run: |
-          "xcodebuild \
-          CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ \
-          -derivedDataPath ios/build -UseModernBuildSystem=YES \
-          -workspace AssetStorage.xcworkspace \
-          -scheme AssetStorage \
-          -sdk iphonesimulator \
-          -configuration Debug \
-          -destination \"generic/platform=iOS Simulator\" \
-          build \
-          CODE_SIGNING_ALLOWED=NO"
 
       - name: Send Failure GitHub Action trigger data to Slack workflow
         uses: slackapi/slack-github-action@v1.24.0
