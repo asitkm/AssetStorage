@@ -104,7 +104,6 @@ jobs:
 
       - name: Send Failure GitHub Action trigger data to Slack workflow
         id: slack
-        channel-id: 'C040Y3ACZM1'
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: 'C040Y3ACZM1'
